@@ -1,4 +1,4 @@
 import map from "./map.js";
-import route1 from "./route.js";
+import routes from "./routes.js";
 
-export { map, route1 };
+export default map;
