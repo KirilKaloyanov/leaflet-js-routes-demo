@@ -1,26 +1,19 @@
 import map from "./map.js";
 
-function createRoute(arr, title) {
-  let myPolyline = L.polyline(arr, { color: "red", weight: 5 }).addTo(map);
-  myPolyline.title = title;
-
+function createRoute(arr, title, color) {
+  let myPolyline = L.polyline(arr, { color: color, weight: 5 }).addTo(map);
+  myPolyline.bindPopup(title);
   myPolyline.on("mouseover", onMouseOver);
   myPolyline.on("mouseout", onMouseOut);
-  myPolyline.on("click", titleHandler);
 
   return myPolyline;
 }
 
 function onMouseOver(e) {
-  e.target.setStyle({ color: "blue" });
+  e.target.setStyle({ weight: 10 });
 }
 function onMouseOut(e) {
-  e.target.setStyle({ color: "red" });
-}
-
-function titleHandler(e) {
-  let routeTitleElement = document.getElementById("routeTitle");
-  routeTitleElement.textContent = e.target.title;
+  e.target.setStyle({ weight: 5 });
 }
 
 export default createRoute;
