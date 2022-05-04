@@ -1,25 +1,31 @@
 import createRoute from "./createRoute.js";
-import json from "./DunavChernoMore2.js";
+import dunavChernoMore2 from "./DunavChernoMore2.js";
+import ironCurtainTrail10 from "./IronCurtainTrail10.js";
 
-let i = 1;
+let route = [];
 
-for (let key of json.features) {
-  let color = "";
-  let arr = [];
-  for (let line of key.geometry.coordinates) {
-    arr.push([line[1], line[0]]);
+function mapArrayToRoute(coordsData, title, color) {
+  let lineArray = [];
+  for (let key of coordsData.features) {
+    let coordsArray = [];
+    for (let coords of key.geometry.coordinates) {
+      coordsArray.push([coords[1], coords[0]]);
+    }
+    lineArray.push(coordsArray);
   }
-  if (i % 2 == 0) color = "purple";
-  else color = "green";
-  createRoute(arr, `Title ${i}`, color);
-  i++;
+
+  createRoute(lineArray, title, color);
 }
 
-let myArr2 = [
-  [44.5, 27.5],
-  [45.5, 26.5],
-];
+mapArrayToRoute(
+  dunavChernoMore2,
+  "EuroVelo 6 - Дунавски велосипеден маршрут",
+  "blue"
+);
+mapArrayToRoute(
+  ironCurtainTrail10,
+  "EuroVelo 13 - Пътят на Желязната завеса",
+  "green"
+);
 
-let route2 = createRoute(myArr2, "title2", "purple");
-
-export default route2;
+export default route;
